@@ -1,10 +1,12 @@
+import { IonPage } from '@ionic/react';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import QrReader from 'react-qr-reader';
-
+import { useHistory } from 'react-router';
 
 export default function DoctorMain() {
-    const [result, setResult] = useState('No result');
+    const history = useHistory();
+    const [result, setResult] = useState('');
     const [showCamera, setShowCamera] = useState(false);
     const constraints = {
         facingMode: 'portrait', // Use the rear-facing camera
@@ -16,8 +18,14 @@ export default function DoctorMain() {
         console.log(result)
     }, [result])
 
+    useEffect(() => {
+        if (result.length > 0) {
+            history.push(`/doc/patientInfo/${result}}`)
+        }
+    }, [result])
+
     return (
-        <div>
+        <IonPage>
 
 
 
@@ -37,12 +45,11 @@ export default function DoctorMain() {
                             style={{ width: "100%" }}
 
                         />
-                        <p>{result}</p>
                     </div>
                 )
             }
 
 
-        </div>
+        </IonPage>
     )
 }
