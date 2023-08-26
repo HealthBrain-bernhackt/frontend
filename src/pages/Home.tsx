@@ -6,7 +6,7 @@ import calendar from '../assets/calendar.png'
 
 const data = [
     {
-        name: 'Medication A', value: 10, dosage: '80mg', times: [{ time: '8:00', taken: true }, { time: '12:00', taken: false }, { time: '16:00', taken: false }, { time: '16:00', taken: false }]
+        name: 'Medication A', value: 10, dosage: '80mg', times: [{ time: '8:00', taken: true }, { time: '12:30', taken: false }, { time: '16:00', taken: false }, { time: '16:00', taken: false }]
     },
     {
         name: 'Medication B', value: 10, dosage: '200mg', times: [{ time: '8:00', taken: true }, { time: '20:00', taken: false }]
@@ -23,21 +23,42 @@ const hour = date.getHours();
 
 const returnNearestMedicationTime = (medication: any) => {
     const times = medication.times;
-    const currentTime = new Date().getHours(); // Get the current hour
-    let nearestTime = times[0];
+    const currentTime = new Date();
+    let nearestTime: string | null = null;
+    let nearestIndex: number | null = null;
 
-    times.forEach((time: any) => {
-        const timeValue = parseInt(time.time, 10);
+    times.forEach((timeObject: any, index: number) => {
+        if (timeObject.taken === true) {
+            return; // Skip this time and continue with the next iteration
+        }
 
-        if (timeValue > currentTime) {
-            if (timeValue < nearestTime && time.taken === false) {
-                nearestTime = timeValue;
-            }
+        if (!nearestTime || timeObject.time < nearestTime) {
+            nearestTime = timeObject.time;
+            nearestIndex = index;
         }
     });
 
-    return nearestTime;
+    if (nearestTime === null) {
+        return { timeString: 'No upcoming time', index: -1 };
+    }
+
+    return { timeString: nearestTime, index: nearestIndex };
 };
+
+
+
+
+
+const returnLatestTaken = (medication: any) => {
+    for (let i = medication.times.length - 1; i >= 0; i--) {
+        if (medication.times[i].taken) {
+            return medication.times[i].time;
+        }
+    }
+}
+
+
+
 
 
 export default function Home() {
@@ -50,8 +71,8 @@ export default function Home() {
                     <div className="flex justify-center items-center mt-12">
                         <PieChart className="w-6/12"
                             data={[
-                                { title: 'One', value: 60, color: '#17A6C6' },
-                                { title: 'Two', value: 20, color: '#f5f6f7' },
+                                { title: 'Taken', value: 2, color: '#17A6C6' },
+                                { title: 'Not taken', value: 2, color: '#f5f6f7' },
                             ]}
                             lineWidth={40}
                         />
@@ -65,10 +86,11 @@ export default function Home() {
                     <div>
                         {data.map((medication, index) => {
                             const nearestTime = returnNearestMedicationTime(medication);
+
                             return (
                                 <div key={index}>
                                     <div className="mt-5">
-                                        <p className="font-bold text-lg">{nearestTime.time}</p>
+                                        <p className="font-bold text-lg">{nearestTime.timeString}</p>
                                         <div className="grid-cols-2 grid rounded-md bg-gray-100 px-5 py-6">
                                             <div>
                                                 <p className="font-bold text-lg">{medication.name}</p>
@@ -78,9 +100,51 @@ export default function Home() {
                                                 <input
                                                     type="checkbox"
                                                     className="w-6 h-6 border-2 border-gray-400 rounded-full transition-all checked:bg-blue-500 checked:border-blue-500"
+                                                    onChange={() => {
+                                                        // Check if nearestTime is not null
+                                                        if (nearestTime !== null) {
+                                                            const { index } = nearestTime;
+
+                                                            // Update the 'taken' property if the index is valid
+                                                            if (index !== null && index !== -1 && data[index].times) {
+                                                                data[index].times[nearestTime.index].taken = true;
+                                                            }
+                                                        }
+                                                    }}
                                                 />
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
 
+
+
+                    </div>
+                    <h5 className="mt-5 font-bold">Already taken</h5>
+                    <div>
+                        {data.map((medication, index) => {
+                            const latestTaken = returnLatestTaken(medication);
+                            return (
+                                <div key={index}>
+                                    <div className="mt-5">
+                                        <p className="font-bold text-lg">
+                                            {latestTaken === null ? 'Not Taken' : `${latestTaken}`}
+                                        </p>
+                                        <div className="grid-cols-2 grid rounded-md bg-[#B9E4EE] px-5 py-6">
+                                            <div>
+                                                <p className="font-bold text-lg">{medication.name}</p>
+                                                <p className="">{medication.dosage}</p>
+                                            </div>
+                                            <div className="flex justify-end items-center">
+                                                <input
+                                                    type="checkbox"
+                                                    defaultChecked
+                                                    className="w-6 h-6 border-2 border-gray-400 rounded-full transition-all checked:bg-blue-500 checked:border-blue-500 cursor-not-allowed opacity-50"
+                                                    disabled
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
