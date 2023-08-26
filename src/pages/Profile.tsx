@@ -21,7 +21,7 @@ export default function Profile() {
                             <QRCode
                                 size={128}
                                 style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                                value={"https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"}
+                                value={"326436435463453546"}
                                 viewBox={`0 0 256 256`}
                             />
                         </div>
