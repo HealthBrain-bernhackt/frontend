@@ -4,6 +4,8 @@ import HeadNav from '../components/HeadNav'
 import { PieChart } from 'react-minimal-pie-chart';
 import calendar from '../assets/calendar.png'
 import { MedicationToday } from '../types/MedicationToday';
+import Container from '../components/Container';
+import { toast, Toaster } from 'react-hot-toast';
 
 
 const date = new Date();
@@ -223,7 +225,7 @@ export default function Home() {
                             );
                         })}
                     </div>
-                    </Container>
+                </Container>
             </IonContent>
         </IonPage>
 
