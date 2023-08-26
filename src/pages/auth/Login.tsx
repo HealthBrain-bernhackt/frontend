@@ -38,7 +38,7 @@ export default function Login() {
             let identity = parseJwt(response.access);
             if (identity.doctor === true) {
                 //TODO: doctors page
-                history.push("/app/home/")
+                history.push("/doc/home/")
             } else if (identity.doctor === false) {
                 history.push("/app/home/")
             }

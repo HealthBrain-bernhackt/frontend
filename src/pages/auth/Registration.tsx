@@ -37,11 +37,15 @@ export default function Registration() {
                 localStorage.setItem("access_token", response.access)
             }
             let identity = parseJwt(response.access);
+            console.log(identity)
+            console.log(response)
             if (identity.doctor === true) {
                 //TODO: doctors page
-                history.push("/app/home/")
+                history.push("/doc/home/")
             } else if (identity.doctor === false) {
                 history.push("/gender")
+            } else {
+                console.log("no identity found in jwt")
             }
         })
         .catch((error: any) => {
