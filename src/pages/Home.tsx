@@ -6,6 +6,9 @@ import calendar from '../assets/calendar.png'
 import { MedicationToday } from '../types/MedicationToday';
 import Container from '../components/Container';
 import { toast, Toaster } from 'react-hot-toast';
+import { Plugins } from '@capacitor/core';
+import { LocalNotifications } from '@capacitor/local-notifications';
+
 
 
 const date = new Date();
@@ -43,9 +46,30 @@ const returnNearestMedicationTime = (medication: any) => {
     return { timeString: nearestTime, index: nearestIndex };
 };
 
+const scheduleNotification = async (id = 1, hour = 8, minute = 0, name = "") => {
+    LocalNotifications.schedule({
+        notifications: [
+            {
+                title: 'HealthBrain',
+                body: `${name} is due now!`,
+                id: id,
+                schedule: {
+                    on: {
+                        // Set notification to trigger every day at 7:30PM
+                        hour: hour,
+                        minute: minute
+                    },
+                    allowWhileIdle: true,
+                    repeats: true
+                },
+            },
+        ],
+    });
+};
 
-
-
+const requestPermission = async () => {
+    await LocalNotifications.requestPermissions();
+};
 
 
 const returnLatestTaken = (medication: any) => {
@@ -86,17 +110,11 @@ function calculateMedicationTakenPercentage(medications: MedicationToday[]): num
     return Math.round(percentageTaken);
 }
 
-
-
-
-
-
 export default function Home() {
-
     const [data, setData] = useState(
         new Array<MedicationToday>(
             {
-                name: 'Medication A', value: 10, dosage: '80mg', times: [{ time: '8:00', taken: false }, { time: '12:30', taken: false }, { time: '16:00', taken: false }, { time: '20:00', taken: false }]
+                name: 'Medication A', value: 10, dosage: '80mg', times: [{ time: '8:00', taken: false }, { time: '12:30', taken: false }, { time: '16:00', taken: false }, { time: '22:11', taken: false }, { time: '22:12', taken: false }, { time: '22:13', taken: false }]
             },
             {
                 name: 'Medication B', value: 10, dosage: '200mg', times: [{ time: '8:00', taken: false }, { time: '20:00', taken: false }]
@@ -105,6 +123,19 @@ export default function Home() {
     );
 
     const [percentageTaken, setPercentageTaken] = useState(0);
+
+    useEffect(() => {
+        requestPermission();
+        data.forEach((medication, index) => {
+            medication.times.forEach((timeObject, i) => {
+                if (!timeObject.taken) {
+                    const [hour, minute] = timeObject.time.split(':').map(Number);
+                    scheduleNotification(index + i, hour, minute, medication.name);
+                }
+            });
+        });
+    }, [data]);
+
 
     useEffect(() => {
         const percent = calculateMedicationTakenPercentage(data);
