@@ -19,25 +19,25 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import Tabs from './Tabs';
 
-import Login from './pages/Login';
-
+import Login from './pages/auth/Login';
+import Registration from './pages/auth/Registration';
 
 setupIonicReact();
 
-const user = {};
+const user = null;
 
 function App() {
   return (
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
+          {/*  */}
           <Route path="/" exact={true}>
             {user && <Redirect to="/app/home" />}
             {!user && <Login />}
           </Route>
-          <Route path="/login" exact={true}>
-            {user && <Redirect to="/app/home" />}
-            {!user && <Login />}
+          <Route path="/registration" exact={true}>
+            {<Registration />}
           </Route>
           <Route path="/app" component={Tabs} />
         </IonRouterOutlet>
