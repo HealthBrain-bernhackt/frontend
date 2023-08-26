@@ -1,5 +1,5 @@
 import React from 'react'
-import { IonPage, IonTitle, IonContent } from '@ionic/react'
+import { IonPage, IonContent } from '@ionic/react'
 import Container from '../../components/Container'
 import Button from '../../components/Button'
 
