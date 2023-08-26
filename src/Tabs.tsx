@@ -5,6 +5,8 @@ import { Route, Redirect } from 'react-router-dom'
 import Home from './pages/Home';
 import Chat from './pages/Chat';
 import Profile from './pages/Profile';
+import ChatAI from './pages/ChatAI';
+import ContactDoctor from './pages/ContactDoctor';
 
 
 const user = {
@@ -20,6 +22,8 @@ export default function Tabs() {
                         <Route path="/app/home" render={() => <Home />} exact={true} />
                         <Route path="/app/chat" render={() => <Chat />} exact={true} />
                         <Route path="/app/profile" render={() => <Profile />} exact={true} />
+                        <Route path="/app/chatAI" render={() => <ChatAI />} exact={true} />
+                        <Route path="/app/contactDoctor" render={() => <ContactDoctor />} exact={true} />
                     </IonRouterOutlet>
                 </IonRouterOutlet>
 

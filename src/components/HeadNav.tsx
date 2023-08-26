@@ -12,7 +12,7 @@ export default function HeadNav({ back }: { back: boolean }) {
         <IonHeader>
             <IonToolbar>
                 <IonButtons slot="start">
-                    {back && <IonBackButton defaultHref="home" ></IonBackButton>}
+                    {back && <IonBackButton defaultHref="/" ></IonBackButton>}
                 </IonButtons>
 
                 <IonTitle className="ion-text-center">

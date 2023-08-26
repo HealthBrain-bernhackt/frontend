@@ -24,7 +24,7 @@ import Registration from './pages/auth/Registration';
 
 setupIonicReact();
 
-const user = null;
+const user = {};
 
 function App() {
   return (
