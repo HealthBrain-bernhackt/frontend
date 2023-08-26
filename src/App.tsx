@@ -22,8 +22,10 @@ import Tabs from './Tabs';
 import Login from './pages/auth/Login';
 import Registration from './pages/auth/Registration';
 import AuthType from './pages/auth/AuthType';
-import Role from './pages/auth/Role';
 import Gender from './pages/auth/profile/Gender';
+import GeneralInfo from './pages/auth/profile/GeneralInfo';
+import Birthday from './pages/auth/profile/Birthday';
+import Preconditions from './pages/auth/profile/Preconditions';
 
 setupIonicReact();
 
@@ -39,11 +41,19 @@ function App() {
             {user && <Redirect to="/app/home" />}
             {!user && <AuthType />}
           </Route>
+          <Route path="/preconditions" exact={true}>
+            {user && <Redirect to="/app/home" />}
+            {!user && <Preconditions />}
+          </Route>
+          <Route path="/GeneralInfo" exact={true}>
+            {user && <Redirect to="/app/home" />}
+            {!user && <GeneralInfo />}
+          </Route>
           <Route path="/register" exact={true}>
             {<Registration />}
           </Route>
-          <Route path="/role" exact={true}>
-            {<Role />}
+          <Route path="/birthday" exact={true}>
+            {<Birthday />}
           </Route>
           <Route path="/gender" exact={true}>
             {<Gender />}
