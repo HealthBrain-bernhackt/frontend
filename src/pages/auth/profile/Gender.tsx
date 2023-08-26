@@ -1,8 +1,15 @@
 import { useState } from 'react'
 import { IonPage, IonContent } from '@ionic/react'
+import { useHistory } from 'react-router-dom'
 
 export default function Gender() {
+    const history = useHistory()
     const [gender, setGender] = useState('female')
+
+    const handleNext =() => {
+        localStorage.setItem("gender", gender);
+        history.push("/birthday")
+    }
 
     return (
         <IonPage>
@@ -16,7 +23,7 @@ export default function Gender() {
                             <button className={`rounded-lg py-4 flex items-center justify-center my-3 font-bold w-full ${gender === "male" ? "bg-[#8BD3E2]" : "bg-[#F6F6F6]"}`} onClick={() => setGender("male")}>Male</button>
                             <button className={`rounded-lg  py-4 flex items-center justify-center my-3 font-bold w-full ${gender === "other" ? "bg-[#8BD3E2]" : "bg-[#F6F6F6]"}`} onClick={() => setGender("other")}>Other</button>
 
-                            <button className='rounded-lg bg-[#8BD3E2] py-4 flex items-center justify-center mt-16 font-bold w-full'>Continue</button>
+                            <button onClick={handleNext} className='rounded-lg bg-[#8BD3E2] py-4 flex items-center justify-center mt-16 font-bold w-full'>Continue</button>
                         </div>
                     </div>
                 </div>

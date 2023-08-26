@@ -26,6 +26,7 @@ import Gender from './pages/auth/profile/Gender';
 import GeneralInfo from './pages/auth/profile/GeneralInfo';
 import Birthday from './pages/auth/profile/Birthday';
 import Preconditions from './pages/auth/profile/Preconditions';
+import Allergies from './pages/auth/profile/Allergies';
 
 setupIonicReact();
 
@@ -45,7 +46,11 @@ function App() {
             {user && <Redirect to="/app/home" />}
             {!user && <Preconditions />}
           </Route>
-          <Route path="/GeneralInfo" exact={true}>
+          <Route path="/allergies" exact={true}>
+            {user && <Redirect to="/app/home" />}
+            {!user && <Allergies />}
+          </Route>
+          <Route path="/generalInfo" exact={true}>
             {user && <Redirect to="/app/home" />}
             {!user && <GeneralInfo />}
           </Route>

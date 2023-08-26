@@ -11,7 +11,10 @@ export default function Birthday() {
         setBirthday(event.detail.value);
     };
 
-
+    const handleNext = () => {
+        localStorage.setItem("birthday", birthday)
+        history.push("/generalInfo")
+    }
     console.log(birthday);
     //example of what birthday could be: 2021-12-06T20:15:00
 
@@ -30,7 +33,7 @@ export default function Birthday() {
 
                         <button
                             className='rounded-lg bg-[#8BD3E2] py-4 flex items-center justify-center mt-16 font-bold w-full'
-                            onClick={() => history.push("/preconditions")}
+                            onClick={handleNext}
                         >
                             Continue
                         </button>
