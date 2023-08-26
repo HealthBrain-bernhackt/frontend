@@ -3,7 +3,7 @@ import { IonPage, IonTitle, IonContent, IonIcon } from '@ionic/react'
 import HeadNav from '../components/HeadNav'
 import chatBubbleIllustration from '../assets/chatBubbleIllustration.svg'
 
-export default function Login() {
+export default function Chat() {
     return (
         <IonPage>
             <HeadNav back={false} />
