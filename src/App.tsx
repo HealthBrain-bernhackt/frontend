@@ -27,10 +27,10 @@ import GeneralInfo from './pages/auth/profile/GeneralInfo';
 import Birthday from './pages/auth/profile/Birthday';
 import Preconditions from './pages/auth/profile/Preconditions';
 import Allergies from './pages/auth/profile/Allergies';
+import DoctorMain from './pages/doctor/DoctorMain';
 
 setupIonicReact();
-
-const user = null;
+const user = {};
 
 function App() {
   return (
@@ -65,6 +65,9 @@ function App() {
           </Route>
           <Route path="/login" exact={true}>
             {<Login />}
+          </Route>
+          <Route path="/doc/home" exact={true}>
+            {<DoctorMain />}
           </Route>
           <Route path="/app" component={Tabs} />
         </IonRouterOutlet>

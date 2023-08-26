@@ -28,7 +28,7 @@ export default function Preconditions() {
                         {/* List of Preconditions */}
                         <ul className="mt-4">
                             {preconditions.map((condition, index) => (
-                                <li key={index}>{condition}</li>
+                                <li key={index} className='py-2 border-gray-300 border border-solid my-2 px-4 rounded-lg'>{condition}</li>
                             ))}
                         </ul>
                         {/* Input Field */}

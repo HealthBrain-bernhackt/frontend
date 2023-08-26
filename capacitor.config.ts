@@ -6,7 +6,10 @@ const config: CapacitorConfig = {
   webDir: 'build',
   server: {
     androidScheme: 'https'
-  }
+  },
+  plugins: {
+    LocalNotifications: {},
+  },
 };
 
 export default config;
