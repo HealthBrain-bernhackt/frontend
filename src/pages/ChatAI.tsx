@@ -1,33 +1,42 @@
-import { useState } from 'react'
-import Container from '../components/Container'
-import { IonPage, IonContent } from '@ionic/react'
-import HeadNav from '../components/HeadNav'
-import sendIcon from '../assets/sendIcon.svg'
+import React, { useState } from 'react';
+import Container from '../components/Container';
+import { IonPage, IonContent } from '@ionic/react';
+import HeadNav from '../components/HeadNav';
+import sendIcon from '../assets/sendIcon.svg';
 
 export default function ChatAI() {
+    const [message, setMessage] = useState<string>(''); // Added type annotation string
 
-    const [message, setMessage] = useState('');
-
-    const handleInputChange = (e: any) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // Added type annotation React.ChangeEvent<HTMLTextAreaElement>
         setMessage(e.target.value);
     };
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => { // Added type annotation React.FormEvent<HTMLFormElement>
         e.preventDefault();
         // Handle form submission here, e.g., send the message to a chat system.
-        console.log('Message sent:', message);
-        // Clear the message input
+        setUserMessages([...userMessages, message]);
         setMessage('');
     };
+    const [userMessages, setUserMessages] = useState<string[]>([]); // Added type annotation string[]
 
     return (
         <IonPage>
             <HeadNav back={true} />
             <IonContent>
-                <Container>
+                <div className="chat chat-start mt-5 w-8/12">
+                    <div className="chat-bubble chat-bubble-primary">
+                        Hi, I am MediSearch AI, here to help you with medical advice, track your health, and answer your health questions.
+                    </div>
+                </div>
+                <div>
+                    {userMessages.map((message, index) => (
+                        <div className="chat chat-end" key={index}>
+                            <div className="chat-bubble">{message}</div>
+                        </div>
+                    ))}
+                </div>
 
-                </Container>
-                <form onSubmit={handleSubmit} className='bottom-0 fixed w-full pb-5 pt-2 bg-gray-50'>
+                <form onSubmit={handleSubmit} className="bottom-0 fixed w-full pb-5 pt-2 bg-gray-50">
                     <div className="flex items-center px-3 py-2 rounded-lg dark:bg-gray-700">
                         <textarea
                             id="chat"
@@ -47,6 +56,7 @@ export default function ChatAI() {
                     </div>
                 </form>
             </IonContent>
-        </IonPage >
-    )
+        </IonPage>
+    );
 }
+
