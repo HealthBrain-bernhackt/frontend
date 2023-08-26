@@ -5,6 +5,7 @@ import Button from '../../components/Button'
 import { ILogin, IRegister } from '../../types/Auth'
 import auth from '../../services/auth.service'
 import { useHistory } from 'react-router-dom'
+import parseJwt from '../../utils/jwt'
 
 export default function Registration() {
     const history = useHistory()
@@ -31,14 +32,19 @@ export default function Registration() {
         localStorage.removeItem("access_token")
 
         auth.register(registerData)
-        .then((response) => {
-            if (registerData.doctor === true) {
-                history.push("/login")
-            } else if (registerData.doctor === false) {
+        .then((response: any) => {
+            if (response && response.access) {
+                localStorage.setItem("access_token", response.access)
+            }
+            let identity = parseJwt(response.access);
+            if (identity.doctor === true) {
+                //TODO: doctors page
+                history.push("/app/home/")
+            } else if (identity.doctor === false) {
                 history.push("/gender")
             }
         })
-        .catch((error) => {
+        .catch((error: any) => {
             console.log(error)
         })
     }

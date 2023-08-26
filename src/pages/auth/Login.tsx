@@ -31,12 +31,13 @@ export default function Login() {
         localStorage.removeItem("access_token")
 
         auth.login(loginData)
-        .then((response) => {
+        .then((response: any) => {
             if (response && response.access) {
                 localStorage.setItem("access_token", response.access)
             }
             let identity = parseJwt(response.access);
             if (identity.doctor === true) {
+                //TODO: doctors page
                 history.push("/app/home/")
             } else if (identity.doctor === false) {
                 history.push("/app/home/")

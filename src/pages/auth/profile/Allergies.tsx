@@ -28,11 +28,11 @@ export default function Allergies() {
         }
         console.log(dataUserInfo)
         user.postInfo(dataUserInfo)
-        .then((response) => {
+        .then((response : any) => {
             console.log(response)
             history.push("/app/home")
         })
-        .catch((error) => {
+        .catch((error : any) => {
             console.log(error)
         })
     }
