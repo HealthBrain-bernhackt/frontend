@@ -1,37 +1,44 @@
 import React, { useState } from 'react';
-import Container from '../components/Container';
 import { IonPage, IonContent } from '@ionic/react';
 import HeadNav from '../components/HeadNav';
 import sendIcon from '../assets/sendIcon.svg';
 
-export default function ChatAI() {
-    const [message, setMessage] = useState<string>(''); // Added type annotation string
+// Define a type for your state object
+type MessageType = {
+    message: string;
+    type: string;
+};
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // Added type annotation React.ChangeEvent<HTMLTextAreaElement>
-        setMessage(e.target.value);
+const ChatAI: React.FC = () => {
+
+    const [inputMessage, setInputMessage] = useState<string>(''); // Store the current input message as a string
+
+    const [allMessages, setAllMessages] = useState<MessageType[]>([
+        { message: "Hi, I am MediSearch AI, here to help you with medical advice, track your health, and answer your health questions.", type: 'ai' }
+    ]); // Store all messages as MessageType[]
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setInputMessage(e.target.value); // Update the input message
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => { // Added type annotation React.FormEvent<HTMLFormElement>
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Handle form submission here, e.g., send the message to a chat system.
-        setUserMessages([...userMessages, message]);
-        setMessage('');
+
+        // Add the new message to allMessages as a MessageType object
+        setAllMessages([...allMessages, { message: inputMessage, type: 'human' }]);
+
+        // Clear the input after submitting
+        setInputMessage('');
     };
-    const [userMessages, setUserMessages] = useState<string[]>([]); // Added type annotation string[]
 
     return (
         <IonPage>
             <HeadNav back={true} />
             <IonContent>
-                <div className="chat chat-start mt-5 w-8/12">
-                    <div className="chat-bubble chat-bubble-primary">
-                        Hi, I am MediSearch AI, here to help you with medical advice, track your health, and answer your health questions.
-                    </div>
-                </div>
-                <div>
-                    {userMessages.map((message, index) => (
-                        <div className="chat chat-end" key={index}>
-                            <div className="chat-bubble">{message}</div>
+                <div className='mt-5'>
+                    {allMessages.map((message, index) => (
+                        <div className={`chat ${message.type == "ai" ? "chat-start" : "chat-end"}`} key={index}>
+                            <div className={`chat-bubble ${message.type == "ai" && "chat-bubble-primary"}`}>{message.message}</div>
                         </div>
                     ))}
                 </div>
@@ -43,7 +50,7 @@ export default function ChatAI() {
                             rows={1}
                             className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Your message..."
-                            value={message}
+                            value={inputMessage}
                             onChange={handleInputChange}
                         ></textarea>
                         <button
@@ -60,3 +67,4 @@ export default function ChatAI() {
     );
 }
 
+export default ChatAI;
