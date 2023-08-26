@@ -3,7 +3,7 @@ import { IonPage, IonTitle, IonContent } from '@ionic/react'
 import Container from '../../components/Container'
 import Button from '../../components/Button'
 
-export default function Registration() {
+export default function Role() {
     return (
         <IonPage>
         <IonContent>

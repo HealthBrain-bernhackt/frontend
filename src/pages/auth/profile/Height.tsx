@@ -1,9 +1,9 @@
 import React from 'react'
 import { IonPage, IonTitle, IonContent } from '@ionic/react'
-import Container from '../../components/Container'
-import Button from '../../components/Button'
+import Container from '../../../components/Container'
+import Button from '../../../components/Button'
 
-export default function Registration() {
+export default function Height() {
     return (
         <IonPage>
         <IonContent>
