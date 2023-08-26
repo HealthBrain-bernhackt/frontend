@@ -21,6 +21,7 @@ import Tabs from './Tabs';
 
 import Login from './pages/auth/Login';
 import Registration from './pages/auth/Registration';
+import AuthType from './pages/auth/AuthType';
 
 setupIonicReact();
 
@@ -34,10 +35,13 @@ function App() {
           {/*  */}
           <Route path="/" exact={true}>
             {user && <Redirect to="/app/home" />}
-            {!user && <Login />}
+            {!user && <AuthType />}
           </Route>
-          <Route path="/registration" exact={true}>
+          <Route path="/register" exact={true}>
             {<Registration />}
+          </Route>
+          <Route path="/login" exact={true}>
+            {<Login />}
           </Route>
           <Route path="/app" component={Tabs} />
         </IonRouterOutlet>
