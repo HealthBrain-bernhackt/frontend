@@ -27,7 +27,9 @@ export default function Tabs() {
                     </IonRouterOutlet>
                 </IonRouterOutlet>
 
-                <IonTabBar slot="bottom">
+                <IonTabBar slot="bottom" className="py-3 border-t border-[#E5E5E5] border-solid" style={{
+                    paddingBottom: 'env(safe-area-inset-bottom)',
+                }}>
                     <IonTabButton tab="home" href="/app/home/">
                         <IonIcon icon={home} />
                         <IonLabel>Home</IonLabel>
@@ -44,6 +46,6 @@ export default function Tabs() {
                     </IonTabButton>
                 </IonTabBar>
             </IonTabs>
-        </IonReactRouter>
+        </IonReactRouter >
     )
 }

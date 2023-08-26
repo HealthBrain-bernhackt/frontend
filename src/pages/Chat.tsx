@@ -3,6 +3,8 @@ import { IonPage, IonTitle, IonContent, IonIcon } from '@ionic/react'
 import HeadNav from '../components/HeadNav'
 import chatBubbleIllustration from '../assets/chatBubbleIllustration.svg'
 import { useHistory } from 'react-router-dom'
+import doctorIcon from '../assets/doctorIcon.svg'
+import brainstorm from '../assets/brainstorm.png'
 
 export default function Chat() {
     const history = useHistory();
@@ -16,14 +18,20 @@ export default function Chat() {
                         <img src={chatBubbleIllustration} alt="chat bubble illustration" className="w-6/12 max-w-48" />
                     </div>
                     <div className='mt-16'>
-                        <button className="w-full bg-[#8BD3E2] py-4 my-2 rounded-lg" onClick={(e) => {
+                        <button className="w-full bg-[#8BD3E2] py-4 my-2 rounded-lg flex items-center justify-center" onClick={(e) => {
                             e.preventDefault();
                             history.push('/app/chatAI/');
-                        }}>Ask HealthBrain AI</button>
-                        <button className="w-full bg-[#51BDD4] py-4 my-2 rounded-lg" onClick={(e) => {
+                        }}>
+                            <img src={brainstorm} alt="doctor icon" className="w-5 h-5 mr-3" />
+                            Ask HealthBrain
+                        </button>
+                        <button className="w-full bg-[#51BDD4] py-4 my-2 rounded-lg flex items-center justify-center" onClick={(e) => {
                             e.preventDefault();
                             history.push('/app/contactDoctor/');
-                        }}>Contact a Doctor</button>
+                        }}>
+                            <img src={doctorIcon} alt="doctor icon" className="w-5 h-5 mr-3" />
+                            Contact a Doctor
+                        </button>
                     </div>
 
                 </div>
