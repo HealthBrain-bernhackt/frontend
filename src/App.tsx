@@ -22,6 +22,8 @@ import Tabs from './Tabs';
 import Login from './pages/auth/Login';
 import Registration from './pages/auth/Registration';
 import AuthType from './pages/auth/AuthType';
+import Role from './pages/auth/Role';
+import Gender from './pages/auth/profile/Gender';
 
 setupIonicReact();
 
@@ -39,6 +41,12 @@ function App() {
           </Route>
           <Route path="/register" exact={true}>
             {<Registration />}
+          </Route>
+          <Route path="/role" exact={true}>
+            {<Role />}
+          </Route>
+          <Route path="/gender" exact={true}>
+            {<Gender />}
           </Route>
           <Route path="/login" exact={true}>
             {<Login />}
