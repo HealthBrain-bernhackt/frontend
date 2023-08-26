@@ -4,6 +4,7 @@ import HeadNav from '../components/HeadNav'
 import { PieChart } from 'react-minimal-pie-chart';
 import calendar from '../assets/calendar.png'
 import { MedicationToday } from '../types/MedicationToday';
+import Container from '../components/Container';
 
 
 const date = new Date();
@@ -76,7 +77,7 @@ export default function Home() {
         <IonPage>
             <HeadNav back={false} />
             <IonContent>
-                <div className='px-8 py-8'>
+                <Container>
                     <h1 className="font-bold">Hi, Max Mustermann</h1>
                     <div className="flex justify-center items-center mt-12">
                         <PieChart className="w-6/12"
@@ -169,7 +170,7 @@ export default function Home() {
                             );
                         })}
                     </div>
-                </div>
+                    </Container>
             </IonContent>
         </IonPage>
 

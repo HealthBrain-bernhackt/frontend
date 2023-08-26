@@ -2,6 +2,7 @@ import React from 'react'
 import { IonPage, IonTitle, IonContent } from '@ionic/react'
 import HeadNav from '../components/HeadNav'
 import QRCode from "react-qr-code";
+import Container from '../components/Container';
 
 
 
@@ -10,7 +11,7 @@ export default function Profile() {
         <IonPage>
             <HeadNav back={false} />
             <IonContent>
-                <div className='px-8 py-8'>
+                <Container>
                     <h1 className="font-bold">Max Mustermann</h1>
                     <div className='flex justify-center mt-10'>
                         <div className="w-64">
@@ -27,7 +28,7 @@ export default function Profile() {
                         <button className="w-full bg-[#8BD3E2] py-4 my-2 rounded-lg">Your health information</button>
                         <button className="w-full bg-[#51BDD4] py-4 my-2 rounded-lg">Your prescriptions</button>
                     </div>
-                </div>
+                    </Container>
             </IonContent>
         </IonPage>
     )
