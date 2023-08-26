@@ -18,7 +18,9 @@ export default function Allergies() {
     const handleSubmit = () => {
         localStorage.setItem("allergies", JSON.stringify(allergies))
         let dataUserInfo: IUserInfo = {
-            age: parseInt(localStorage.getItem('age') || '0', 10),
+            // age: parseInt(localStorage.getItem('age') || '0', 10),
+            //TODO: calculate age from the current date - getItem('age')
+            age: 25,
             gender: localStorage.getItem('gender') || '',
             height: parseInt(localStorage.getItem('height') || '0', 10),
             weight: parseInt(localStorage.getItem('weight') || '0', 10),

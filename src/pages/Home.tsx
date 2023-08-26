@@ -8,6 +8,8 @@ import Container from '../components/Container';
 import { toast, Toaster } from 'react-hot-toast';
 import { Plugins } from '@capacitor/core';
 import { LocalNotifications } from '@capacitor/local-notifications';
+import user from '../services/user.service';
+import { MedicationTime } from '../types/MedicationTime';
 
 
 
@@ -111,16 +113,62 @@ function calculateMedicationTakenPercentage(medications: MedicationToday[]): num
 }
 
 export default function Home() {
+
     const [data, setData] = useState(
         new Array<MedicationToday>(
             {
-                name: 'Medication A', value: 10, dosage: '80mg', times: [{ time: '8:00', taken: false }, { time: '12:30', taken: false }, { time: '16:00', taken: false }, { time: '22:11', taken: false }, { time: '22:12', taken: false }, { time: '22:13', taken: false }]
+                name: 'Medication A',
+                value: 10,
+                dosage: '80mg',
+                times: [{ time: '8:00', taken: false }, { time: '12:30', taken: false }, { time: '16:00', taken: false }, { time: '22:11', taken: false }, { time: '22:12', taken: false }, { time: '22:13', taken: false }]
             },
             {
                 name: 'Medication B', value: 10, dosage: '200mg', times: [{ time: '8:00', taken: false }, { time: '20:00', taken: false }]
             },
         )
     );
+
+    useEffect(() => {
+        user.getTreatments()
+            .then((response: any) => {
+                if (response) {
+                    let medications: MedicationToday[] = []
+                    response.forEach((element: any) => {
+                        let timeArray: string[] = []
+                        if (element.times) {
+                            const cleanString = element.times.replace(/[\[\]']/g, '');
+                            // Splitting the string into an array
+                            timeArray = cleanString.split(',');
+                        }
+                        
+                        let times_converted: MedicationTime[] = []
+                        timeArray.forEach((time : string) => {
+                            times_converted.push(
+                                {
+                                    time: time,
+                                    taken: false
+                                }
+                            )
+                        });
+
+                  
+                        let med: MedicationToday = {
+                            name: element.name,
+                            value: element.doctor,
+                            times: times_converted,
+                            dosage: element.dosage
+                        }
+                        medications.push(med)
+                    }   
+                    );
+                    setData(medications)
+                }
+                console.log(response)
+            })
+            .catch((error: any) => {
+                console.log(error)
+            })
+    }, [])
 
     const [percentageTaken, setPercentageTaken] = useState(0);
 
