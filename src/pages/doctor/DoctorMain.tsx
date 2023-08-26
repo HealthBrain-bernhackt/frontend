@@ -4,10 +4,10 @@ import QrReader from 'react-qr-reader';
 
 
 export default function DoctorMain() {
-    const [data, setData] = useState('No result');
+    const [result, setResult] = useState('No result');
     const [showCamera, setShowCamera] = useState(false);
     const constraints = {
-        facingMode: 'environment', // Use the rear-facing camera
+        facingMode: 'portrait', // Use the rear-facing camera
         frameRate: { ideal: 30, max: 60 }
     };
     return (
@@ -21,17 +21,18 @@ export default function DoctorMain() {
                 showCamera && (
                     <div>
                         <QrReader
-                            onScan={(result: any) => {
-                                if (!!result) {
-                                    setData((result as any)?.text);
-                                }
-
-
+                            delay={300}
+                            onError={(error) => {
+                                console.log(error);
                             }}
-                            className='max-w-xl aspect-square' // You can add a className here
-                            onError={(err: any) => console.log(err)}
+                            onScan={(data) => {
+                                if (data) {
+                                    setResult(data);
+                                }
+                            }}
+                            style={{ width: "100%" }}
                         />
-                        <p>{data}</p>
+                        <p>{result}</p>
                     </div>
                 )
             }
