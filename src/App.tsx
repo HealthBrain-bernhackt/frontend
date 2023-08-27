@@ -28,6 +28,8 @@ import Birthday from './pages/auth/profile/Birthday';
 import Preconditions from './pages/auth/profile/Preconditions';
 import Allergies from './pages/auth/profile/Allergies';
 import DoctorMain from './pages/doctor/DoctorMain';
+import PatientInfo from './pages/doctor/PatientInfo';
+import PrescribeMedicine from './pages/doctor/PrescribeMedicine';
 
 setupIonicReact();
 const user = {};
@@ -68,6 +70,12 @@ function App() {
           </Route>
           <Route path="/doc/home" exact={true}>
             {<DoctorMain />}
+          </Route>
+          <Route path="/doc/patientInfo/:userId" exact={true}>
+            {<PatientInfo />}
+          </Route>
+          <Route path="/doc/prescribeMed/:userId" exact={true}>
+            {<PrescribeMedicine />}
           </Route>
           <Route path="/app" component={Tabs} />
         </IonRouterOutlet>

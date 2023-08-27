@@ -5,6 +5,7 @@ import QRCode from "react-qr-code";
 import Container from '../components/Container';
 import medicalConditions from '../assets/medicalConditions.svg'
 import medicalHistory from '../assets/medicalHistory.svg'
+import doc from '../assets/doc.svg'
 
 
 
@@ -16,18 +17,23 @@ export default function Profile() {
             <IonContent>
                 <Container>
                     <h1 className="font-bold">Max Mustermann</h1>
-                    <div className='flex justify-center mt-10'>
-                        <div className="w-64">
-                            <QRCode
-                                size={128}
-                                style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                                value={"https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"}
-                                viewBox={`0 0 256 256`}
-                            />
+                    <div className='grid grid-cols-2'>
+                        <div>
+                            <p className="mt-5">Have your doctor scan the qr code for more information</p>
+                            <img src={doc} alt="doctor icon" className="w-full rounded-full mt-5" />
+                        </div>
+                        <div className='flex justify-center mt-10 mx-5'>
+                            <div className="w-64">
+                                <QRCode
+                                    size={128}
+                                    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                                    value={"326436435463453546"}
+                                    viewBox={`0 0 256 256`}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <p className="mt-5">Have your doctor scan the qr code for more information</p>
-                    <div className='mt-5'>
+                    <div className='mt-16'>
                         <button className="w-full bg-[#8BD3E2] py-4 my-2 rounded-lg flex items-center justify-center">
                             <img src={medicalHistory} alt="doctor icon" className="w-5 h-5 mr-3" />
                             Medical history
