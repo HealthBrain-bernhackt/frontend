@@ -8,6 +8,7 @@ import Container from '../components/Container';
 import { toast, Toaster } from 'react-hot-toast';
 import { Plugins } from '@capacitor/core';
 import { LocalNotifications } from '@capacitor/local-notifications';
+import HomeIllustration from '../assets/HomeIllustration.svg';
 
 
 
@@ -150,25 +151,28 @@ export default function Home() {
             <IonContent>
                 <Container>
                     <h1 className="font-bold">Hi, Max Mustermann</h1>
-                    <div className="flex justify-center items-center mt-12 relative">
-                        <div>
-                            <div className="relative">
-                                <PieChart
-                                    className="w-40 flex justify-center items-center -rotate-90"
-                                    data={[
-                                        { title: 'Taken', value: percentageTaken, color: '#17A6C6' },
-                                        { title: 'Not taken', value: 100 - percentageTaken, color: '#f5f6f7' },
-                                    ]}
-                                    lineWidth={40}
-                                />
-                                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                    <h1 className="text-center font-bold text-xl ml-2">{percentageTaken}%</h1>
+                    <div className='grid grid-cols-2'>
+                        <img src={HomeIllustration} alt="home illustration" className="w-48 mt-10" />
+                        <div className="flex justify-center items-center mt-12 relative mb-20">
+                            <div>
+                                <div className="relative">
+                                    <PieChart
+                                        className="w-40 flex justify-center items-center -rotate-90"
+                                        data={[
+                                            { title: 'Taken', value: percentageTaken, color: '#17A6C6' },
+                                            { title: 'Not taken', value: 100 - percentageTaken, color: '#f5f6f7' },
+                                        ]}
+                                        lineWidth={40}
+                                    />
+                                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                        <h1 className="text-center font-bold text-xl ml-2">{percentageTaken}%</h1>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <p className="mt-5 text-sm">You have already taken {percentageTaken}% of your medication that is due</p>
+                    <p className="text-sm">You have already taken {percentageTaken}% of your medication that is due</p>
                     <h5 className="mt-5 font-bold">Todays medication</h5>
                     <div className="flex items-center">
                         <img src={calendar} alt='calendar icon' className='w-5' />
