@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, RouteComponentProps } from 'react-router-dom';
 import Container from '../../components/Container';
 import { useState } from 'react';
@@ -18,6 +18,34 @@ export default function PatientInfo() {
     const { userId } = useParams<RouteParams>();
     const [data, setData] = useState<any>({ name: "Max Mustermann", age: 27, gender: "male", height: 250, weight: 400, diagnoses: ["Hayfever", "broken leg"] });
 
+    useEffect(() => {
+        let user_info: any = localStorage.getItem("user_info")
+        setData(JSON.parse(user_info!).profile)
+        console.log(data)
+        if (data.allergies) {
+            const allergiesString = data.allergies;
+            // Remove square brackets and single quotes
+            const cleanedString = allergiesString.replace(/[\[\]']/g, '');
+
+            // Split the string by commas to create an array
+            const allergiesArray: string[] = cleanedString.split(',').map((item: any) => item.trim());
+            data.allergies = allergiesArray
+            console.log(data.all)
+        }
+
+        if (data.preconditions) {
+            const preconditionsString = data.preconditions;
+
+            // Remove square brackets and single quotes
+            const cleanedString2 = preconditionsString.replace(/[\[\]']/g, '');
+
+            // Split the string by commas to create an array
+            const preconditionsArray: string[] = cleanedString2.split(',').map((item: any) => item.trim());
+            data.preconditions = preconditionsArray
+        }
+
+    }, [])
+
     console.log(userId);
 
     return (
@@ -30,12 +58,14 @@ export default function PatientInfo() {
                 <p>Gender: {data.gender}</p>
                 <p>Height: {data.height}cm</p>
                 <p>Weight: {data.weight}kg</p>
-                <p>Diagnoses:</p>
+                <p>Allergies:</p>
                 <ul className='px-6'>
-                    {data.diagnoses.map((diagnosis: string, index: any) => {
-                        return <li key={index} className='list-disc'>{diagnosis}</li>
-                    }
-                    )}
+{data.allergies}
+                  
+                </ul>
+                <p>Preconditions:</p>
+                <ul className='px-6'>
+                    {data.preconditions}
                 </ul>
                 <button className="w-full bg-[#51BDD4] py-4 my-2 rounded-lg flex items-center justify-center mt-10" onClick={() => {
                     history.push(`/doc/prescribeMed/${userId}`);

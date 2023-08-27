@@ -52,7 +52,7 @@ function App() {
             {user && <Redirect to="/app/home" />}
             {!user && <Allergies />}
           </Route>
-          <Route path="/GeneralInfo" exact={true}>
+          <Route path="/generalInfo" exact={true}>
             {user && <Redirect to="/app/home" />}
             {!user && <GeneralInfo />}
           </Route>

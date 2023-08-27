@@ -14,6 +14,11 @@ export default function Preconditions() {
         }
     };
 
+    const handleNext =() => {
+        localStorage.setItem("preconditions", JSON.stringify(preconditions));
+        history.push("/allergies")
+    }
+
     return (
         <IonPage>
             <IonContent>
@@ -46,7 +51,7 @@ export default function Preconditions() {
                         {/* Continue Button */}
                         <button
                             className='rounded-lg bg-[#8BD3E2] py-4 flex items-center justify-center mt-4 font-bold w-full'
-                            onClick={() => history.push("/allergies")}
+                            onClick={handleNext}
                         >
                             Continue
                         </button>

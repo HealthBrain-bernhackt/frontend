@@ -8,6 +8,8 @@ import Container from '../components/Container';
 import { toast, Toaster } from 'react-hot-toast';
 import { Plugins } from '@capacitor/core';
 import { LocalNotifications } from '@capacitor/local-notifications';
+import user from '../services/user.service';
+import { MedicationTime } from '../types/MedicationTime';
 import HomeIllustration from '../assets/HomeIllustration.svg';
 
 
@@ -112,16 +114,62 @@ function calculateMedicationTakenPercentage(medications: MedicationToday[]): num
 }
 
 export default function Home() {
+
     const [data, setData] = useState(
         new Array<MedicationToday>(
             {
-                name: 'Medication A', value: 10, dosage: '80mg', times: [{ time: '8:00', taken: false }, { time: '12:30', taken: false }, { time: '16:00', taken: false }, { time: '22:11', taken: false }, { time: '22:12', taken: false }, { time: '22:13', taken: false }]
+                name: 'Medication A',
+                value: 10,
+                dosage: '80mg',
+                times: [{ time: '8:00', taken: false }, { time: '12:30', taken: false }, { time: '16:00', taken: false }, { time: '22:11', taken: false }, { time: '22:12', taken: false }, { time: '22:13', taken: false }]
             },
             {
                 name: 'Medication B', value: 10, dosage: '200mg', times: [{ time: '8:00', taken: false }, { time: '20:00', taken: false }]
             },
         )
     );
+
+    useEffect(() => {
+        user.getTreatments()
+            .then((response: any) => {
+                if (response) {
+                    let medications: MedicationToday[] = []
+                    response.forEach((element: any) => {
+                        let timeArray: string[] = []
+                        if (element.times) {
+                            const cleanString = element.times.replace(/[\[\]']/g, '');
+                            // Splitting the string into an array
+                            timeArray = cleanString.split(',');
+                        }
+
+                        let times_converted: MedicationTime[] = []
+                        timeArray.forEach((time: string) => {
+                            times_converted.push(
+                                {
+                                    time: time,
+                                    taken: false
+                                }
+                            )
+                        });
+
+
+                        let med: MedicationToday = {
+                            name: element.name,
+                            value: element.doctor,
+                            times: times_converted,
+                            dosage: element.dosage
+                        }
+                        medications.push(med)
+                    }
+                    );
+                    setData(medications)
+                }
+                console.log(response)
+            })
+            .catch((error: any) => {
+                console.log(error)
+            })
+    }, [])
 
     const [percentageTaken, setPercentageTaken] = useState(0);
 
@@ -150,23 +198,22 @@ export default function Home() {
             <Toaster />
             <IonContent>
                 <Container>
-                    <h1 className="font-bold">Hi, Max Mustermann</h1>
-                    <div className='grid grid-cols-2'>
-                        <img src={HomeIllustration} alt="home illustration" className="w-48 mt-10" />
-                        <div className="flex justify-center items-center mt-12 relative mb-20">
-                            <div>
-                                <div className="relative">
-                                    <PieChart
-                                        className="w-40 flex justify-center items-center -rotate-90"
-                                        data={[
-                                            { title: 'Taken', value: percentageTaken, color: '#17A6C6' },
-                                            { title: 'Not taken', value: 100 - percentageTaken, color: '#f5f6f7' },
-                                        ]}
-                                        lineWidth={40}
-                                    />
-                                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                        <h1 className="text-center font-bold text-xl ml-2">{percentageTaken}%</h1>
-                                    </div>
+                    <h1 className="font-bold">
+                        Hi there 👋
+                    </h1>
+                    <div className="flex justify-center items-center mt-12 relative">
+                        <div>
+                            <div className="relative">
+                                <PieChart
+                                    className="w-40 flex justify-center items-center -rotate-90"
+                                    data={[
+                                        { title: 'Taken', value: percentageTaken, color: '#17A6C6' },
+                                        { title: 'Not taken', value: 100 - percentageTaken, color: '#f5f6f7' },
+                                    ]}
+                                    lineWidth={40}
+                                />
+                                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                    <h1 className="text-center font-bold text-xl ml-2">{percentageTaken}%</h1>
                                 </div>
                             </div>
                         </div>
