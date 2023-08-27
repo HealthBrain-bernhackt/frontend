@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IonPage, IonContent } from '@ionic/react';
 import HeadNav from '../components/HeadNav';
 import sendIcon from '../assets/sendIcon.svg';
+import user from '../services/user.service';
 
 // Define a type for your state object
 type MessageType = {
@@ -21,6 +22,10 @@ const ChatAI: React.FC = () => {
         setInputMessage(e.target.value); // Update the input message
     };
 
+    useEffect(() => {
+        console.log(allMessages)
+    }, [allMessages])
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -29,13 +34,23 @@ const ChatAI: React.FC = () => {
 
         // Clear the input after submitting
         setInputMessage('');
+
+        user.message({message : inputMessage})
+        .then((response) => {
+            setAllMessages(prevMessages => [...prevMessages,{ message: response.answer, type: 'ai' }]);
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+        
     };
 
     return (
         <IonPage>
             <HeadNav back={true} />
             <IonContent>
-                <div className='mt-5'>
+                <div className='mt-5 pb-24'>
                     {allMessages.map((message, index) => (
                         <div className={`chat ${message.type == "ai" ? "chat-start" : "chat-end"}`} key={index}>
                             <div className={`chat-bubble ${message.type == "ai" && "chat-bubble-primary"}`}>{message.message}</div>

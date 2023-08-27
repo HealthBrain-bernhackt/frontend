@@ -197,7 +197,9 @@ export default function Home() {
             <Toaster />
             <IonContent>
                 <Container>
-                    <h1 className="font-bold">Hi, Max Mustermann</h1>
+                    <h1 className="font-bold">
+                    Hi there 👋
+</h1>
                     <div className="flex justify-center items-center mt-12 relative">
                         <div>
                             <div className="relative">
