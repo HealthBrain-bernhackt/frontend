@@ -140,9 +140,9 @@ export default function Home() {
                             // Splitting the string into an array
                             timeArray = cleanString.split(',');
                         }
-                        
+
                         let times_converted: MedicationTime[] = []
-                        timeArray.forEach((time : string) => {
+                        timeArray.forEach((time: string) => {
                             times_converted.push(
                                 {
                                     time: time,
@@ -151,7 +151,7 @@ export default function Home() {
                             )
                         });
 
-                  
+
                         let med: MedicationToday = {
                             name: element.name,
                             value: element.doctor,
@@ -159,7 +159,7 @@ export default function Home() {
                             dosage: element.dosage
                         }
                         medications.push(med)
-                    }   
+                    }
                     );
                     setData(medications)
                 }
@@ -198,8 +198,8 @@ export default function Home() {
             <IonContent>
                 <Container>
                     <h1 className="font-bold">
-                    Hi there 👋
-</h1>
+                        Hi there 👋
+                    </h1>
                     <div className="flex justify-center items-center mt-12 relative">
                         <div>
                             <div className="relative">
