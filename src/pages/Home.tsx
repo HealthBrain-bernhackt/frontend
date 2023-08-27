@@ -10,6 +10,7 @@ import { Plugins } from '@capacitor/core';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import user from '../services/user.service';
 import { MedicationTime } from '../types/MedicationTime';
+import HomeIllustration from '../assets/HomeIllustration.svg';
 
 
 
@@ -218,7 +219,7 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <p className="mt-5 text-sm">You have already taken {percentageTaken}% of your medication that is due</p>
+                    <p className="text-sm">You have already taken {percentageTaken}% of your medication that is due</p>
                     <h5 className="mt-5 font-bold">Todays medication</h5>
                     <div className="flex items-center">
                         <img src={calendar} alt='calendar icon' className='w-5' />

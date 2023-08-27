@@ -5,6 +5,7 @@ import chatBubbleIllustration from '../assets/chatBubbleIllustration.svg'
 import { useHistory } from 'react-router-dom'
 import doctorIcon from '../assets/doctorIcon.svg'
 import brainstorm from '../assets/brainstorm.png'
+import ChatIllustration from '../assets/ChatIllustration.svg'
 
 export default function Chat() {
     const history = useHistory();
@@ -15,7 +16,7 @@ export default function Chat() {
                 <div className='px-8 py-8'>
                     <h1 className="font-bold">Questions?</h1>
                     <div className="w-full flex justify-center mt-16">
-                        <img src={chatBubbleIllustration} alt="chat bubble illustration" className="w-6/12 max-w-48" />
+                        <img src={ChatIllustration} alt="chat bubble illustration" className="w-full" />
                     </div>
                     <div className='mt-16'>
                         <button className="w-full bg-[#8BD3E2] py-4 my-2 rounded-lg flex items-center justify-center" onClick={(e) => {
