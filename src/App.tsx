@@ -43,20 +43,19 @@ function App() {
         <IonRouterOutlet>
           {/*  */}
           <Route path="/" exact={true}>
-            {user && <Redirect to="/app/home" />}
-            {!user && <Redirect to="/auth_type" />}
+            {<Redirect to="/auth_type" />}
           </Route>
           <Route path="/preconditions" exact={true}>
-            {user && <Preconditions />}
-            {!user && <Redirect to="/auth_type" />}
+            {<Preconditions />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/allergies" exact={true}>
-            {user && <Allergies />}
-            {!user && <Redirect to="/auth_type" />}
+            { <Allergies />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/generalInfo" exact={true}>
-            {user && <GeneralInfo />}
-            {!user && <Redirect to="/auth_type" />}
+            { <GeneralInfo />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/register" exact={true}>
             <Registration />
@@ -66,27 +65,27 @@ function App() {
             {<AuthType />}
           </Route>
           <Route path="/birthday" exact={true}>
-            {user && <Birthday />}
-            {!user && <Redirect to="/auth_type" />}
+            { <Birthday />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/gender" exact={true}>
-            {user && <Gender />}
-            {!user && <Redirect to="/auth_type" />}
+            { <Gender />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/login" exact={true}>
             {<Login />}
           </Route>
           <Route path="/doc/home" exact={true}>
-            {user && <DoctorMain />}
-            {!user && <Redirect to="/auth_type" />}
+            {<DoctorMain />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/doc/patientInfo/:userId" exact={true}>
-            {user && <PatientInfo />}
-            {!user && <Redirect to="/auth_type" />}
+            { <PatientInfo />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/doc/prescribeMed/:userId" exact={true}>
-            {user && <PrescribeMedicine />}
-            {!user && <Redirect to="/auth_type" />}
+            { <PrescribeMedicine />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/app" component={Tabs} />
         </IonRouterOutlet>
