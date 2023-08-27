@@ -15,6 +15,13 @@ async function message(data: IMessage): Promise<any> {
     return (await api.post(`/medisearch/message`, data)).data
 }
 
+async function getInfoByUserId(id: string): Promise<any> {
+    return (await api.get(`doctor/patient/${id}`)).data
+} 
 
-const user = {postInfo, getTreatments, message}
+async function prescribeMedecine(id: string, data: any): Promise<any> {
+    return (await api.post(`doctor/patient/${id}/treatment`)).data
+}
+
+const user = {postInfo, getTreatments, message, getInfoByUserId, prescribeMedecine}
 export default user;

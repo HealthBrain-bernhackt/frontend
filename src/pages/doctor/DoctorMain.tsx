@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import QrReader from 'react-qr-reader';
 import { useHistory } from 'react-router';
+import user from '../../services/user.service';
 
 export default function DoctorMain() {
     const history = useHistory();
@@ -19,8 +20,18 @@ export default function DoctorMain() {
     }, [result])
 
     useEffect(() => {
+        console.log(result)
+        user.getInfoByUserId(result)
+        .then((response) => {
+            console.log(response)
+            localStorage.setItem("user_info", JSON.stringify(response))
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
         if (result.length > 0) {
-            history.push(`/doc/patientInfo/${result}}`)
+            history.push(`/doc/patientInfo/${result}`)
         }
     }, [result])
 
