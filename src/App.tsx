@@ -59,8 +59,8 @@ function App() {
             {!user && <Redirect to="/auth_type" />}
           </Route>
           <Route path="/register" exact={true}>
-            {user && <Registration />}
-            {!user && <Redirect to="/auth_type" />}
+            <Registration />
+  
           </Route>
           <Route path="/auth_type" exact={true}>
             {<AuthType />}
