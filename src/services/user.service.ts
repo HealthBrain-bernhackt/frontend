@@ -20,7 +20,7 @@ async function getInfoByUserId(id: string): Promise<any> {
 } 
 
 async function prescribeMedecine(id: string, data: any): Promise<any> {
-    return (await api.post(`doctor/patient/${id}/treatment`)).data
+    return (await api.post(`doctor/patient/${id}/treatment`, data)).data
 }
 
 const user = {postInfo, getTreatments, message, getInfoByUserId, prescribeMedecine}

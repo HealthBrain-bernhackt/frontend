@@ -13,14 +13,14 @@ import doc from '../assets/doc.svg'
 
 
 export default function Profile() {
-    const [userId, setUserId] = useState(null)
+    const [userId, setUserId] = useState<string>(localStorage.getItem("access_token") ? parseJwt(localStorage.getItem("access_token")!).user_id : "0")
     const history = useHistory()
+
     useEffect(() => {   
-        if (localStorage.getItem("access_token")){
+        if (localStorage.getItem("access_token")){      
             let token: string | null = localStorage.getItem("access_token")
             setUserId(parseJwt(token!).user_id)
         }
-       
     }, [])
  
 
@@ -40,7 +40,7 @@ export default function Profile() {
                                 <QRCode
                                     size={128}
                                     style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                                    value={"326436435463453546"}
+                                    value={userId! ? userId.toString() : "0"}
                                     viewBox={`0 0 256 256`}
                                 />
                             </div>

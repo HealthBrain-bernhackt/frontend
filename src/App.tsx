@@ -30,52 +30,62 @@ import Allergies from './pages/auth/profile/Allergies';
 import DoctorMain from './pages/doctor/DoctorMain';
 import PatientInfo from './pages/doctor/PatientInfo';
 import PrescribeMedicine from './pages/doctor/PrescribeMedicine';
-
 setupIonicReact();
-const user = {};
+
+
 
 function App() {
+  let user = localStorage.getItem("access_token");
+  console.log(user)
   return (
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
           {/*  */}
           <Route path="/" exact={true}>
-            {user && <Redirect to="/app/home" />}
-            {!user && <AuthType />}
+            {<Redirect to="/auth_type" />}
           </Route>
           <Route path="/preconditions" exact={true}>
-            {user && <Redirect to="/app/home" />}
-            {!user && <Preconditions />}
+            {<Preconditions />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/allergies" exact={true}>
-            {user && <Redirect to="/app/home" />}
-            {!user && <Allergies />}
+            { <Allergies />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/generalInfo" exact={true}>
-            {user && <Redirect to="/app/home" />}
-            {!user && <GeneralInfo />}
+            { <GeneralInfo />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/register" exact={true}>
-            {<Registration />}
+            <Registration />
+  
+          </Route>
+          <Route path="/auth_type" exact={true}>
+            {<AuthType />}
           </Route>
           <Route path="/birthday" exact={true}>
-            {<Birthday />}
+            { <Birthday />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/gender" exact={true}>
-            {<Gender />}
+            { <Gender />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/login" exact={true}>
             {<Login />}
           </Route>
           <Route path="/doc/home" exact={true}>
             {<DoctorMain />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/doc/patientInfo/:userId" exact={true}>
-            {<PatientInfo />}
+            { <PatientInfo />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/doc/prescribeMed/:userId" exact={true}>
-            {<PrescribeMedicine />}
+            { <PrescribeMedicine />}
+            {/* {!user && <Redirect to="/auth_type" />} */}
           </Route>
           <Route path="/app" component={Tabs} />
         </IonRouterOutlet>

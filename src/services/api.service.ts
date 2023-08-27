@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
   // baseURL: process.env.BABEL_BACKEND_URL,
-  baseURL: "someshit",
+  baseURL: "https://health-brain-922fa718a7c7.herokuapp.com/",
 });
 
 api.interceptors.request.use(

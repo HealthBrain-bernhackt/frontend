@@ -30,6 +30,7 @@ export default function PrescribeMedicine() {
     };
 
     const handleSubmit = () => {
+        console.log(medTimes)
         const prescription = {
             name,
             dose,
@@ -39,7 +40,7 @@ export default function PrescribeMedicine() {
             date: Date.now(),
             notes
         };
-
+        console.log(prescription)
         user.prescribeMedecine(userId, prescription)
         .then((response: any) => {
             console.log(response);
